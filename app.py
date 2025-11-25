@@ -8,7 +8,7 @@ import gdown
 
 # ---------------- CONFIG ----------------
 # Replace YOUR_FILE_ID with your actual Google Drive .h5 file ID
-MODEL_URL = "https://drive.google.com/uc?id=YOUR_FILE_ID"
+MODEL_URL = "https://drive.google.com/drive/u/0/folders/1yx-VhmPp5mCTxhH5jFoYFPgbcEmH18rW"
 MODEL_PATH = "best_model.h5"
 IMG_SIZE = (224, 224)
 CLASS_NAMES = ["bird", "drone"]
@@ -57,3 +57,4 @@ if uploaded_file is not None:
     st.subheader("Prediction:")
     st.write(f"**Class:** {predicted_class}")
     st.write(f"**Confidence:** `{confidence:.4f}`")
+
