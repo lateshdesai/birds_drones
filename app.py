@@ -3,13 +3,23 @@ import tensorflow as tf
 import numpy as np
 import cv2
 from PIL import Image
+import os
+import gdown
 
 # ---------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------
-MODEL_PATH = "best_model.h5"        # must be in same repo
+MODEL_URL = "https://drive.google.com/uc?id=1AbCDeFGHIjKLmnOPqrSTUVWxyz123"
+MODEL_PATH = "best_model.h5"
 IMG_SIZE = (224, 224)
-CLASS_NAMES = ["bird", "drone"]     # update if reversed in training
+CLASS_NAMES = ["bird", "drone"]
+
+# ---------------------------------------------------------
+# DOWNLOAD MODEL IF NOT PRESENT
+# ---------------------------------------------------------
+if not os.path.exists(MODEL_PATH):
+    st.write("Downloading model...")
+    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
 
 # ---------------------------------------------------------
 # LOAD MODEL
@@ -22,13 +32,13 @@ def load_model():
 model = load_model()
 
 # ---------------------------------------------------------
-# PREPROCESS FUNCTION
+# IMAGE PREPROCESSING
 # ---------------------------------------------------------
 def preprocess_image(uploaded_file):
     image = Image.open(uploaded_file).convert("RGB")
     image_np = np.array(image)
 
-    # Resize to CNN input size
+    # Resize
     img_resized = cv2.resize(image_np, IMG_SIZE)
 
     # Normalize
@@ -41,27 +51,25 @@ def preprocess_image(uploaded_file):
 # STREAMLIT UI
 # ---------------------------------------------------------
 st.title("🐦🚁 Bird vs Drone Classifier")
-st.write("Upload an image to classify it as **Bird** or **Drone**.")
+st.write(" Upload an image to classify it as **Bird** or **Drone**.")
 
 uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Show uploaded image
+    # Display image
     image, processed = preprocess_image(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    # Predict
+    # Prediction
     pred_prob = model.predict(processed)[0][0]
 
-    # Determine class
     if pred_prob > 0.5:
-        predicted_class = CLASS_NAMES[1]   # drone
+        predicted_class = CLASS_NAMES[1]
         confidence = pred_prob
     else:
-        predicted_class = CLASS_NAMES[0]   # bird
+        predicted_class = CLASS_NAMES[0]
         confidence = 1 - pred_prob
 
-    # Display Output
-    st.subheader("Prediction")
+    st.subheader("Prediction:")
     st.write(f"**Class:** {predicted_class}")
-    st.write(f"**Confidence:** {confidence:.4f}")
+    st.write(f"**Confidence:** `{confidence:.4f}`")
