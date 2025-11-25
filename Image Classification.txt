@@ -1,0 +1,111 @@
+"C:\Users\Latesh's Acer\.conda\envs\Birds_Drones\python.exe" C:\Birds_Drones\image_classifier_CNN.py 
+2025-11-25 20:07:56.153701: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'cudart64_110.dll'; dlerror: cudart64_110.dll not found
+2025-11-25 20:07:56.154027: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+
+--- IMAGE COUNTS ---
+Train: {'bird': 1414, 'drone': 1248}
+Valid: {'bird': 217, 'drone': 225}
+Test: {'bird': 121, 'drone': 94}
+
+Class Imbalance Check:
+bird: 1414 images
+drone: 1248 images
+
+Showing sample images from TRAIN set...
+Found 2662 images belonging to 2 classes.
+Found 442 images belonging to 2 classes.
+Found 215 images belonging to 2 classes.
+2025-11-25 20:11:31.196973: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'nvcuda.dll'; dlerror: nvcuda.dll not found
+2025-11-25 20:11:31.197207: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2025-11-25 20:11:31.201025: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: DESKTOP-SRB37LL
+2025-11-25 20:11:31.201285: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: DESKTOP-SRB37LL
+2025-11-25 20:11:31.202118: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d (Conv2D)             (None, 222, 222, 32)      896       
+                                                                 
+ max_pooling2d (MaxPooling2D  (None, 111, 111, 32)     0         
+ )                                                               
+                                                                 
+ conv2d_1 (Conv2D)           (None, 109, 109, 64)      18496     
+                                                                 
+ max_pooling2d_1 (MaxPooling  (None, 54, 54, 64)       0         
+ 2D)                                                             
+                                                                 
+ conv2d_2 (Conv2D)           (None, 52, 52, 128)       73856     
+                                                                 
+ max_pooling2d_2 (MaxPooling  (None, 26, 26, 128)      0         
+ 2D)                                                             
+                                                                 
+ flatten (Flatten)           (None, 86528)             0         
+                                                                 
+ dense (Dense)               (None, 256)               22151424  
+                                                                 
+ dropout (Dropout)           (None, 256)               0         
+                                                                 
+ dense_1 (Dense)             (None, 1)                 257       
+                                                                 
+=================================================================
+Total params: 22,244,929
+Trainable params: 22,244,929
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/25
+84/84 [==============================] - 59s 690ms/step - loss: 0.6843 - accuracy: 0.6307 - val_loss: 0.6147 - val_accuracy: 0.6561
+Epoch 2/25
+84/84 [==============================] - 60s 714ms/step - loss: 0.5443 - accuracy: 0.7220 - val_loss: 0.5712 - val_accuracy: 0.7398
+Epoch 3/25
+84/84 [==============================] - 59s 704ms/step - loss: 0.5025 - accuracy: 0.7457 - val_loss: 0.5808 - val_accuracy: 0.7240
+Epoch 4/25
+84/84 [==============================] - 58s 682ms/step - loss: 0.4814 - accuracy: 0.7603 - val_loss: 0.5010 - val_accuracy: 0.7511
+Epoch 5/25
+84/84 [==============================] - 59s 703ms/step - loss: 0.4565 - accuracy: 0.7784 - val_loss: 0.4717 - val_accuracy: 0.7941
+Epoch 6/25
+84/84 [==============================] - 70s 835ms/step - loss: 0.3997 - accuracy: 0.8178 - val_loss: 0.4905 - val_accuracy: 0.8077
+Epoch 7/25
+84/84 [==============================] - 60s 708ms/step - loss: 0.3872 - accuracy: 0.8156 - val_loss: 0.4258 - val_accuracy: 0.8054
+Epoch 8/25
+84/84 [==============================] - 58s 693ms/step - loss: 0.3651 - accuracy: 0.8291 - val_loss: 0.4171 - val_accuracy: 0.8348
+Epoch 9/25
+84/84 [==============================] - 57s 679ms/step - loss: 0.3563 - accuracy: 0.8392 - val_loss: 0.4844 - val_accuracy: 0.8167
+Epoch 10/25
+84/84 [==============================] - 56s 668ms/step - loss: 0.3215 - accuracy: 0.8599 - val_loss: 0.4247 - val_accuracy: 0.8326
+Epoch 11/25
+84/84 [==============================] - 57s 672ms/step - loss: 0.3213 - accuracy: 0.8580 - val_loss: 0.4483 - val_accuracy: 0.8077
+Epoch 12/25
+84/84 [==============================] - 56s 669ms/step - loss: 0.3174 - accuracy: 0.8625 - val_loss: 0.4061 - val_accuracy: 0.8462
+Epoch 13/25
+84/84 [==============================] - 56s 667ms/step - loss: 0.2801 - accuracy: 0.8809 - val_loss: 0.4497 - val_accuracy: 0.8213
+Epoch 14/25
+84/84 [==============================] - 57s 670ms/step - loss: 0.2876 - accuracy: 0.8794 - val_loss: 0.3831 - val_accuracy: 0.8439
+Epoch 15/25
+84/84 [==============================] - 56s 671ms/step - loss: 0.2608 - accuracy: 0.8933 - val_loss: 0.4524 - val_accuracy: 0.8394
+Epoch 16/25
+84/84 [==============================] - 57s 671ms/step - loss: 0.2433 - accuracy: 0.9023 - val_loss: 0.4594 - val_accuracy: 0.8484
+Epoch 17/25
+84/84 [==============================] - 57s 671ms/step - loss: 0.2193 - accuracy: 0.9095 - val_loss: 0.3839 - val_accuracy: 0.8665
+Epoch 18/25
+84/84 [==============================] - 56s 667ms/step - loss: 0.2117 - accuracy: 0.9155 - val_loss: 0.4552 - val_accuracy: 0.8575
+Epoch 19/25
+84/84 [==============================] - 56s 668ms/step - loss: 0.2216 - accuracy: 0.9113 - val_loss: 0.4297 - val_accuracy: 0.8733
+
+Saved accuracy/loss plots as training_curves.png
+7/7 [==============================] - 1s 146ms/step
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        bird       0.91      0.87      0.89       121
+       drone       0.84      0.89      0.87        94
+
+    accuracy                           0.88       215
+   macro avg       0.88      0.88      0.88       215
+weighted avg       0.88      0.88      0.88       215
+
+
+Best model saved as best_model.h5
+
+Process finished with exit code 0
