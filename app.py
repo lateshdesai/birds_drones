@@ -6,22 +6,20 @@ from PIL import Image
 import os
 import gdown
 
-# ---------------- CONFIG ----------------
-# Replace YOUR_FILE_ID with your actual Google Drive .h5 file ID
-MODEL_URL = "https://drive.google.com/drive/u/0/folders/1yx-VhmPp5mCTxhH5jFoYFPgbcEmH18rW"
-MODEL_PATH = "best_model.h5"
+# ---------------- CONSTANTS ----------------
 IMG_SIZE = (224, 224)
-CLASS_NAMES = ["bird", "drone"]
-
-# ---------------- DOWNLOAD MODEL ----------------
-if not os.path.exists(MODEL_PATH):
-    with st.spinner("Downloading model..."):
-        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+CLASS_NAMES = ["Bird", "Drone"]
 
 # ---------------- LOAD MODEL ----------------
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model(MODEL_PATH)
+    url = "https://drive.google.com/uc?id=1EmkY3VoJjJ_xfhctmo9ZhNAR--YV5PrA"
+    output = "model.h5"
+
+    if not os.path.exists(output):
+        gdown.download(url, output, quiet=False)
+    
+    model = tf.keras.models.load_model(output)
     return model
 
 model = load_model()
@@ -56,5 +54,4 @@ if uploaded_file is not None:
 
     st.subheader("Prediction:")
     st.write(f"**Class:** {predicted_class}")
-    st.write(f"**Confidence:** `{confidence:.4f}`")
-
+    st.write(f"**Confidence:** {confidence*100:.2f}%")
